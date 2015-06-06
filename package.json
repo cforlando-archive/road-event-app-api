@@ -1,6 +1,8 @@
 {
-	"name": "Scott's App",
+	"name": "ScottApp",
 	"description": "Code For Orlando's National Day of Civic Hacking: Scott's App\nScott works for City of Orlando and has to publish road closure data every Thursday.  He hand types it each and every time and then sends a PDF out to various consumers.  Would it not be cool if he could just enter each event and road closure into a database and have it auto-publish?  Yeah, that would be cool!",
+	"license": "null",
+	
 	"date":"2015/06/06",
 	"version": "0.0.1",
 	"private": false,
