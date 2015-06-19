@@ -32,6 +32,46 @@ function ajaxOnResult(evt)
 
 function pprint( cityevents )
 {
-	cityeventjson = JSON.stringify(cityevents);
-	$(".cityevent").html("<pre>"+cityeventjson+"</pre>");
+	for( i=0; i<cityevents.length; i++ )
+	{
+		cityevent = cityevents[i];
+		var evt = $("<div />", {"class":"cityevent",id:cityevent["id"]});
+		var title = $("<div />", {"class":"cityevent_title",text:cityevent["title"]});
+		var description = $("<span />", {"class":"cityevent_description",text:cityevent["description"]});
+		var l = cityevent["roadevents"].length;
+		if( l > 1 )
+		{
+			var closures = $("<ul />", {"class":"cityevent_closures"});
+			for( j=0; j<cityevent["roadevents"].length; j++ )
+			{
+				var roadevent = cityevent["roadevents"][j];
+				//var closure = $("<li />", {"class":"cityevent_closure",html:"<b><u>"+roadevent["description"]+"</u></b> from "+roadevent["schedule"]});
+				var closure = $("<li />", {"class":"cityevent_closure",html:"<b><u>"+roadevent["description"]+"</u></b>"});
+				var schedule = $("<div />", {"class":"cityevent_schedule",html:"<i>"+roadevent["schedule"]+"</i>."});
+				closure.append(schedule);
+				closures.append(closure);
+			}
+			evt.append(description);
+			evt.append(closures);
+		}
+		else
+		{
+			var roadevent = cityevent["roadevents"][0];
+			var closure = $("<div />", {"class":"cityevent_closure",html:"<b><u>"+roadevent["description"]+"</u></b>"});
+			evt.append(closure);
+			var schedule = $("<div />", {"class":"cityevent_schedule",html:"<i>"+roadevent["schedule"]+"</i>."});
+			evt.append(schedule);
+			evt.append(description);
+		}
+		if( cityevent["contact"] != "" )
+		{
+			evt.append($("<div />", {"class":"cityevent_contact",text:cityevent["contact"]}));
+		}
+		if( cityevent["url"] != "" )
+		{
+			var url = $("<a />", {href:cityevent["url"],text:cityevent["url"]});
+			evt.append(url);
+		}
+		$("#cityevents").append(evt);
+	}
 }
